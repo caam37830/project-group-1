@@ -1,36 +1,41 @@
 import unittest
-from ../sir/discrete import *
+import sys
+sys.path.append("../")
+from sir.discretemodel import *
 
 class TestDiscreteMethod(unittest.TestCase):
-    def __init__(self):
-        self.agent = Agent()
+    # def __init__(self):
+    #     self.agent = Agent()
 
     def test_susc(self):
         """
         Tests that Agent class returns susceptible = True
         """
-        self.assertEqual(self.agent.is_susceptible(), True)
-        self.assertEqual(self.agent.is_infected(), False)
-        self.assertEqual(self.agent.is_recovered(), False)
+        agent = Agent()
+        self.assertEqual(agent.is_susceptible(), True)
+        self.assertEqual(agent.is_infected(), False)
+        self.assertEqual(agent.is_recovered(), False)
 
     def test_inf(self):
         """
         Tests that Agent class returns infected = True
         """
-        self.agent.infect()
-        self.assertEqual(self.agent.is_susceptible(), False)
-        self.assertEqual(self.agent.is_infected(), True)
-        self.assertEqual(self.agent.is_recovered(), False)
+        agent = Agent()
+        agent.infect()
+        self.assertEqual(agent.is_susceptible(), False)
+        self.assertEqual(agent.is_infected(), True)
+        self.assertEqual(agent.is_recovered(), False)
 
 
     def test_rec(self):
         """
         Tests that Agent class returns recovered = True
         """
-        self.agent.recover()
-        self.assertEqual(self.agent.is_susceptible(), False)
-        self.assertEqual(self.agent.is_infected(), True)
-        self.assertEqual(self.agent.is_recovered(), False)
+        agent = Agent()
+        agent.recover()
+        self.assertEqual(agent.is_susceptible(), False)
+        self.assertEqual(agent.is_infected(), False)
+        self.assertEqual(agent.is_recovered(), True)
 
     def test_sum(self):
         """
@@ -46,6 +51,6 @@ class TestDiscreteMethod(unittest.TestCase):
                 for t in ts:
                     for n in ns:
                         counts_sus, counts_inf, counts_rec = run_simulation(b, k, N=n, T=t)
-                        cts = counts_sus + counts_inf + counts_rec
-                        self.assertEqual(cts, n)
-
+                        for i in range(len(counts_sus)):
+                            cts = counts_sus[i] + counts_inf[i] + counts_rec[i]
+                            self.assertEqual(cts, n)
