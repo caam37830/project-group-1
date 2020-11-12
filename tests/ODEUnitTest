@@ -6,15 +6,10 @@ import unittest
 import numpy as np
 from scipy.integrate import solve_ivp
 
-#NEED TO WORK ON IMPORTING OTHER FILE
-#import sys  
-#sys.path.append('**/Git/Serpents-n-Pythons/sir/')  
-#from ODE_Function import * #scriptName without .py extension  
-
-#import sys, os
-#__file__ = 'ODE_Scripts.ipynb'
-#sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'sir'))
-#import ODE_Function
+#Imports defined functions
+import sys
+sys.path.append("../")
+from sir.ODE_Function import *
 
 
 class TestODEs(unittest.TestCase):
@@ -23,20 +18,14 @@ class TestODEs(unittest.TestCase):
         '''
         This will test that x dot, y dot, and z dot are sufficiently close to the solution's respective discretized results
         '''
-        h = 300 #Time Step - days
+        h = 600 #Time Step - 600 days
         k = 2*h #Time Step - half days
         y_init = np.array([0.99999, 0.00001, 0]) #Initial Condition
-        tspan = np.linspace(0, 300, k + 2) #300 days, halfday-steps
+        tspan = np.linspace(0, 600, k + 2) #600 days, halfday-steps + 1 extra
         
         b = .30 #Infection Rate
         k = .20 #Removal Rate
         c = [b, k] #Array of constants (referenced in derivative function)
-        
-def f(t, SIR, c): #derivative function
-    dSIRdt = [-1 * c[0] * SIR[0] * SIR[1],# S dot
-            c[0] * SIR[0] * SIR[1] - c[1] * SIR[1],# I dot 
-            c[1] * SIR[1]] #R dot
-    return dSIRdt
         
         sol = solve_ivp(lambda t, SIR: f(t, SIR, c), \
                 [tspan[0], tspan[-1]], SIR_init, t_eval=tspan)
@@ -86,20 +75,14 @@ def f(t, SIR, c): #derivative function
         '''
         This will test that x dot, y dot, and z dot are sufficiently close to the solution's respective discretized results
         '''
-        h = 300 #Time Step - days
+        h = 600 #Time Step - days
         k = 2*h #Time Step - half days
         y_init = np.array([0.99999, 0.00001, 0]) #Initial Condition
-        tspan = np.linspace(0, 300, k + 2) #300 days, halfday-steps
+        tspan = np.linspace(0, 600, k + 2) #600 days, halfday-steps + 1 extra
         
         b = .30 #Infection Rate
         k = .20 #Removal Rate
         c = [b, k] #Array of constants (referenced in derivative function)
-        
-        def f(t, SIR, c): #derivative function
-            dSIRdt = [-1 * c[0] * SIR[0] * SIR[1],# S dot
-                    c[0] * SIR[0] * SIR[1] - c[1] * SIR[1],# I dot 
-                    c[1] * SIR[1]] #R dot
-            return dSIRdt
         
         sol = solve_ivp(lambda t, SIR: f(t, SIR, c), \
                 [tspan[0], tspan[-1]], SIR_init, t_eval=tspan)
@@ -117,20 +100,14 @@ def f(t, SIR, c): #derivative function
         '''
         This will test that x dot, y dot, and z dot are sufficiently close to the solution's respective discretized results
         '''
-        h = 300 #Time Step - days
+        h = 600 #Time Step - days
         k = 2*h #Time Step - half days
         y_init = np.array([0.99999, 0.00001, 0]) #Initial Condition
-        tspan = np.linspace(0, 300, k + 2) #300 days, halfday-steps
+        tspan = np.linspace(0, 600, k + 2) #600 days, halfday-steps + 1 extra
         
         b = .30 #Infection Rate
         k = .20 #Removal Rate
         c = [b, k] #Array of constants (referenced in derivative function)
-        
-        def f(t, SIR, c): #derivative function
-            dSIRdt = [-1 * c[0] * SIR[0] * SIR[1],# S dot
-                    c[0] * SIR[0] * SIR[1] - c[1] * SIR[1],# I dot 
-                    c[1] * SIR[1]] #R dot
-            return dSIRdt
         
         sol = solve_ivp(lambda t, SIR: f(t, SIR, c), \
                 [tspan[0], tspan[-1]], SIR_init, t_eval=tspan)
