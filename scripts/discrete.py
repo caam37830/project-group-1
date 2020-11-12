@@ -70,9 +70,9 @@ class simulate(Agent):
             self.N = 1000
         self.pop = [Agent() for i in range(self.N)]
         if T:
-            self.T = T
+            self.T = int(T)
         else:
-            self.T = 100
+            self.T = int(100)
 
     def count_infected(self):
         return sum(p.is_infected() for p in self.pop)
@@ -83,7 +83,7 @@ class simulate(Agent):
     def count_susc(self):
         return sum(p.is_susceptible() for p in self.pop)
 
-    def run_simulation(self, b, k, T=None, N=None):
+    def run_simulation(self):
         """
         return the number of susceptible, infected, and recovered people at time T
         """
