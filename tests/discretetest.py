@@ -4,7 +4,13 @@ sys.path.append("../")
 from sir.discretemodel import *
 
 class TestDiscreteMethod(unittest.TestCase):
-
+    '''
+    Runs the following tests:
+    1) Tests that an initialized Agent class is susceptible
+    2) Tests that an Agent class is returned infected after that Agent has become infected
+    3) Tests that an Agent class is returned recovered after that Agent has become recovered
+    4) Tests that Susceptible + Infected + Removed = Total Population  for all points in time
+    '''
     def test_susc(self):
         """
         Tests that Agent class returns susceptible = True
