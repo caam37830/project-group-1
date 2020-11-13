@@ -12,7 +12,12 @@ sys.path.append("../")
 from sir.ODE_Function import *
 
 class TestODEs(unittest.TestCase):
-                  
+    '''
+    Runs the following tests for the ODE case:
+    1) Checks finite differences Dx, Dy, Dz are approximately equal to our differential equation solution when plugged into our ODE.
+    2) Checks that x + y + z = 1 for all points of time.
+    3) Checks that Dx + Dy + Dz = 0 for all points of time.
+    '''
     def test_partials_ODE(self):
         '''
         This will test that x dot, y dot, and z dot are sufficiently close to the solution's respective discretized results
