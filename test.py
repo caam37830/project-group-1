@@ -3,8 +3,6 @@ Implement ODE Unit Tests
 """
 
 import unittest
-import numpy as np
-from scipy.integrate import solve_ivp
 
 # Imports defined functions
 import sys
