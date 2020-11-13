@@ -38,7 +38,7 @@ class Agent():
     
     def infect(self):
         """
-        the person becomes infected
+        The person becomes infected
         """
         self.infected = True
         self.susceptible = False
@@ -55,12 +55,21 @@ class Agent():
 
 # functions to count the number of infected, recovered and susceptible at a given point in time
 def count_infected(pop):
+    """
+    Returns # of infected people
+    """
     return sum(p.is_infected() for p in pop)
 
 def count_recovered(pop):
+    """
+    Returns # of recovered people
+    """
     return sum(p.is_recovered() for p in pop)
 
 def count_susc(pop):
+    """
+    Returns # of susceptible people
+    """
     return sum(p.is_susceptible() for p in pop)
 
 
@@ -69,21 +78,21 @@ def run_simulation(b, k, N=1_000, T=20):
     """
     return the number of people S, I and R for each time period t
     """    
-    pop = [Agent() for i in range(N)] # our population
-    pop[0].infect()
+    pop = [Agent() for i in range(N)] # Generates our population
+    pop[0].infect() # Creates patient zero
     counts_sus = [count_susc(pop)]
     counts_inf = [count_infected(pop)]
     counts_rec = [count_recovered(pop)]
     for t in range(T):
     # update the population
         for i in range(N):
-            if pop[i].is_infected():
+            if pop[i].is_infected(): # if infected, then infect other susceptible people with p(infect) = b
                 for j in range(N):
                     if pop[j].is_susceptible():
                         if rand() < b:
                             pop[j].infect()        
-                if rand() < k:
-                    pop[i].recover()   
+                if rand() < k: # if infected, recover with p(recover) = k
+                    pop[i].recover()
         counts_sus.append(count_susc(pop))
         counts_inf.append(count_infected(pop))
         counts_rec.append(count_recovered(pop))
@@ -109,57 +118,3 @@ def run_simulation_phase(b, k, N=1_000, T=10):
                 if rand() < k:
                     pop[i].recover()  
     return count_infected(pop)
-
-
-
-
-    # class simulate(Agent):
-#     """
-#     runs simulations of the discrete SIR model
-#     N is the population size
-#     b is the number of interactions each day that could spread the disease (per individual)
-#     k is the fraction of the infectious population which recovers each day
-#     """
-
-#     def __init__(self, b, k, T=None, N=None):
-#         self.b = b
-#         self.k = k
-#         if N:
-#             self.N = N
-#         else:
-#             self.N = 1000
-#         self.pop = [Agent() for i in range(self.N)]
-#         if T:
-#             self.T = int(T)
-#         else:
-#             self.T = int(100)
-
-#     def count_infected(self):
-#         return sum(p.is_infected() for p in self.pop)
-
-#     def count_recovered(self):
-#         return sum(p.is_recovered() for p in self.pop)
-
-#     def count_susc(self):
-#         return sum(p.is_susceptible() for p in self.pop)
-
-#     def run_simulation(self):
-#         """
-#         return the number of susceptible, infected, and recovered people at time T
-#         """
-#         self.pop[0].infect()
-    
-#         for t in range(self.T):
-#             for i in range(self.N):
-#                 if self.pop[i].is_infected():
-#                     for j in range(self.N):
-#                         if self.pop[j].is_susceptible():
-#                             if rand() < self.b:
-#                                 self.pop[j].infect()        
-#                     if rand() < self.k:
-#                         self.pop[i].recover()
-#         self.susc = self.count_susc()
-#         self.inf =  self.count_infected()
-#         self.rec = self.count_recovered()
-#         self.cts = [self.susc, self.inf, self.rec]
-#         return self.cts 
