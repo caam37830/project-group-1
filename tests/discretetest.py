@@ -6,9 +6,9 @@ from sir.discretemodel import *
 class TestDiscreteMethod(unittest.TestCase):
     '''
     Runs the following tests:
-    1) Tests that an initialized Agent class is susceptible (and nothing else)
-    2) Tests that an Agent class is returned infected (and nothing else) after that Agent has become infected
-    3) Tests that an Agent class is returned recovered (and nothing else) after that Agent has become recovered
+    1) Tests that an initialized Agent class is susceptible
+    2) Tests that an Agent class is returned infected after that Agent has become infected
+    3) Tests that an Agent class is returned recovered after that Agent has become recovered
     4) Tests that Susceptible + Infected + Removed = Total Population  for all points in time
     '''
     def test_susc(self):
@@ -45,6 +45,7 @@ class TestDiscreteMethod(unittest.TestCase):
         """
         Tests that S+I+R = N
         """
+        # Some test values for each parameter
         bs = [0.1, 0.2, 0.3]
         ks = [0.01, 0.02, 0.03]
         ts = [10, 20, 30]
@@ -54,7 +55,7 @@ class TestDiscreteMethod(unittest.TestCase):
             for k in ks:
                 for t in ts:
                     for n in ns:
-                        counts_sus, counts_inf, counts_rec = run_simulation(b, k, N=n, T=t)
+                        counts_sus, counts_inf, counts_rec = run_simulation(b, k, N=n, T=t) # Run simulations
                         for i in range(len(counts_sus)):
                             cts = counts_sus[i] + counts_inf[i] + counts_rec[i]
-                            self.assertEqual(cts, n)
+                            self.assertEqual(cts, n) # Test to see the values sum to n
