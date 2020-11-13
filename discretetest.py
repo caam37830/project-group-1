@@ -1,11 +1,4 @@
-import unittest
 
-import numpy as np 
-from numpy.random import randint, rand
-import matplotlib.pyplot as plt
-
-import sys
-sys.path.append("../")
 from sir.discretemodel import *
 
 class TestDiscreteMethod(unittest.TestCase):
