@@ -4,8 +4,6 @@ sys.path.append("../")
 from sir.discretemodel import *
 
 class TestDiscreteMethod(unittest.TestCase):
-    # def __init__(self):
-    #     self.agent = Agent()
 
     def test_susc(self):
         """
