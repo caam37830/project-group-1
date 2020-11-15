@@ -3,6 +3,7 @@ Implement Unit Tests
 """
 
 import unittest
+import numpy as np
 
 # Imports defined functions
 import sys
