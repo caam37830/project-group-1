@@ -1,5 +1,5 @@
 """
-Implement ODE Unit Tests
+Implement Unit Tests
 """
 
 import unittest
@@ -7,7 +7,7 @@ import unittest
 # Imports defined functions
 import sys
 sys.path.append("../")
-from sir.ODE_Function import *
+from sir.ode_function import *
 from sir.discretemodel import *
 
 class TestODEs(unittest.TestCase):
