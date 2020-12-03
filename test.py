@@ -10,6 +10,7 @@ import sys
 sys.path.append("../")
 from sir.ode_function import *
 from sir.discretemodel import *
+from sir.discretemodelspatial import *
 
 class TestODEs(unittest.TestCase):
 
@@ -151,19 +152,16 @@ class TestDiscreteMethod(unittest.TestCase):
         Tests that Agent class returns susceptible = True
         """
         agent = Agent()
-        self.assertEqual(agent.is_susceptible(), True)
-        self.assertEqual(agent.is_infected(), False)
-        self.assertEqual(agent.is_recovered(), False)
+        self.assertEqual(agent.state, 'S')
+
 
     def test_inf(self):
         """
         Tests that Agent class returns infected = True
         """
         agent = Agent()
-        agent.infect()
-        self.assertEqual(agent.is_susceptible(), False)
-        self.assertEqual(agent.is_infected(), True)
-        self.assertEqual(agent.is_recovered(), False)
+        agent.change_state()
+        self.assertEqual(agent.state, 'I')
 
 
     def test_rec(self):
@@ -171,10 +169,9 @@ class TestDiscreteMethod(unittest.TestCase):
         Tests that Agent class returns recovered = True
         """
         agent = Agent()
-        agent.recover()
-        self.assertEqual(agent.is_susceptible(), False)
-        self.assertEqual(agent.is_infected(), False)
-        self.assertEqual(agent.is_recovered(), True)
+        agent.change_state()
+        agent.change_state()
+        self.assertEqual(agent.state, 'R')
 
     def test_sum(self):
         """

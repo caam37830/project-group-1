@@ -13,64 +13,45 @@ class Agent():
     """
     
     def __init__(self):
-        self.infected = False # if infected = True, the person has been infected
-        self.recovered = False # if recovered = True, the person has been recovered
-        self.susceptible = True # if susceptible = False, the person has either been infected or has recovered
-   
-    def is_infected(self):
+        self.state = 'S'
+
+    def state(self):
         """
-        returns true if the person is infected
+        returns if person is S, I or R
         """
-        return self.infected
+        return self.state
     
-    def is_recovered(self):
+    def change_state(self):
         """
-        returns true if the person is recovered
+        Changes state from S to I, or I to R
         """
-        return self.recovered
-
-    def is_susceptible(self):
-        """
-        returns true if the person is susceptible
-        """
-        return self.susceptible
-
-    
-    def infect(self):
-        """
-        The person becomes infected
-        """
-        self.infected = True
-        self.susceptible = False
-        self.recovered = False
-
-    def recover(self):
-        """
-        the person recovers
-        """
-        self.recovered = True
-        self.infected = False
-        self.susceptible = False
-
+        if self.state == 'S':
+            self.state = 'I'
+        elif self.state == 'I':
+            self.state = 'R'
+        else:
+            pass
 
 # functions to count the number of infected, recovered and susceptible at a given point in time
+def count_susc(pop):
+    """
+    Returns # of susceptible people
+    """
+    return sum(p.state == 'S' for p in pop)
+
+
 def count_infected(pop):
     """
     Returns # of infected people
     """
-    return sum(p.is_infected() for p in pop)
+    return sum(p.state == 'I' for p in pop)
+
 
 def count_recovered(pop):
     """
     Returns # of recovered people
     """
-    return sum(p.is_recovered() for p in pop)
-
-def count_susc(pop):
-    """
-    Returns # of susceptible people
-    """
-    return sum(p.is_susceptible() for p in pop)
+    return sum(p.state == 'R' for p in pop)
 
 
 # function to run a simulation to return the trends in S, I and R
@@ -79,20 +60,20 @@ def run_simulation(b, k, N=1_000, T=20):
     return the number of people S, I and R for each time period t
     """    
     pop = [Agent() for i in range(N)] # Generates our population
-    pop[0].infect() # Creates patient zero
+    pop[0].change_state() # Creates patient zero
     counts_sus = [count_susc(pop)]
     counts_inf = [count_infected(pop)]
     counts_rec = [count_recovered(pop)]
     for t in range(T):
     # update the population
         for i in range(N):
-            if pop[i].is_infected(): # if infected, then infect other susceptible people with p(infect) = b
+            if pop[i].state == 'I': # if infected, then infect other susceptible people with p(infect) = b
                 for j in range(N):
-                    if pop[j].is_susceptible():
+                    if pop[j].state == 'S':
                         if rand() < b:
-                            pop[j].infect()        
+                            pop[j].change_state()
                 if rand() < k: # if infected, recover with p(recover) = k
-                    pop[i].recover()
+                    pop[i].change_state()
         counts_sus.append(count_susc(pop))
         counts_inf.append(count_infected(pop))
         counts_rec.append(count_recovered(pop))
@@ -106,15 +87,15 @@ def run_simulation_phase(b, k, N=1_000, T=10):
     return the number of people infected at time T
     """
     pop = [Agent() for i in range(N)] # our population
-    pop[0].infect()
+    pop[0].change_state()
     for t in range(T):
     # update the population
         for i in range(N):
-            if pop[i].is_infected():
+            if pop[i].state == 'I':
                 for j in range(N):
-                    if pop[j].is_susceptible():
+                    if pop[j].state == 'S':
                         if rand() < b:
-                            pop[j].infect()        
+                            pop[j].change_state()
                 if rand() < k:
-                    pop[i].recover()  
+                    pop[i].change_state()
     return count_infected(pop)
