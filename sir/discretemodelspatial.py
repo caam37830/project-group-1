@@ -3,7 +3,7 @@ import random
 from scipy.spatial import KDTree
 
 
-class Agent:
+class AgentSpatial:
     """
     This class represents an agent.
     Assume that all agents are susceptible and no one is infected or recovered in the beginning.
@@ -81,7 +81,7 @@ def discrete_spatial_simulation(k, q, p=None, n=1000, t=20, position=False, num_
         k=rate of recovery, q=radius of infection, p=step_size, n=population, t=time
     Returns number of S, I and R individuals at time t
     """
-    pop = [Agent(p) for i in range(n)] # Generates our population
+    pop = [AgentSpatial(p) for i in range(n)] # Generates our population
 
     if position == 'middle':
         middle = [0.5, 0.5]

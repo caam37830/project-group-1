@@ -1,9 +1,15 @@
 [
-  "test.py::TestODEs::test_derivative_sums",
-  "test.py::TestODEs::test_partials_ODE",
-  "test.py::TestODEs::test_sums",
   "test.py::TestDiscreteMethod::test_inf",
   "test.py::TestDiscreteMethod::test_rec",
   "test.py::TestDiscreteMethod::test_sum",
-  "test.py::TestDiscreteMethod::test_susc"
+  "test.py::TestDiscreteMethod::test_susc",
+  "test.py::TestDiscreteSpatialMethod::test_change_pos",
+  "test.py::TestDiscreteSpatialMethod::test_inf",
+  "test.py::TestDiscreteSpatialMethod::test_rec",
+  "test.py::TestDiscreteSpatialMethod::test_sum",
+  "test.py::TestDiscreteSpatialMethod::test_susc",
+  "test.py::TestODEs::test_derivative_sums",
+  "test.py::TestODEs::test_partials_ODE",
+  "test.py::TestODEs::test_sums",
+  "test.py::TestStochasticMethod::test_sum"
 ]

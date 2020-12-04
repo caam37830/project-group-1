@@ -61,9 +61,9 @@ def stochastic_constant_contacts(p, R, N=200, contacts=4):
     """
     pop = [Agent() for i in range(N)]
     pop[0].change_state()
-    counts_sus = [count_susc(pop)]
-    counts_inf = [count_infected(pop)]
-    counts_rec = [count_recovered(pop)]
+    counts_sus = []
+    counts_inf = []
+    counts_rec = []
     t_firstinf = np.zeros(N)
     t_firstinf[0] = 0
     t=0
@@ -93,9 +93,9 @@ def stochastic_fixed_contacts(p, R, N=200, fixed=10):
     """
     pop = [Agent() for i in range(N)]
     pop[0].change_state()
-    counts_sus = [count_susc(pop)]
-    counts_inf = [count_infected(pop)]
-    counts_rec = [count_recovered(pop)]
+    counts_sus = []
+    counts_inf = []
+    counts_rec = []
     t_firstinf = np.zeros(N)
     t_firstinf[0] = 0
     t=0
@@ -126,9 +126,9 @@ def stochastic_random_contacts(p, R, N=200, fixed=10, random=4):
     """
     pop = [Agent() for i in range(N)]
     pop[0].change_state()
-    counts_sus = [count_susc(pop)]
-    counts_inf = [count_infected(pop)]
-    counts_rec = [count_recovered(pop)]
+    counts_sus = []
+    counts_inf = []
+    counts_rec = []
     t_firstinf = np.zeros(N)
     t_firstinf[0] = 0
     t=0
@@ -153,57 +153,5 @@ def stochastic_random_contacts(p, R, N=200, fixed=10, random=4):
         counts_rec.append(count_recovered(pop))
     return counts_sus, counts_inf, counts_rec, t
 
-# duration of the pandemic
-# First set of simulations: constant number of contacts per person
-def stochastic_duration_constant(p, R, N=200):
-    """
-    runs simulation of the stochastic SIR model
-    """
-    pop = [Agent() for i in range(N)]
-    pop[0].infect()
-    t_firstinf = np.zeros(N)
-    t_firstinf[0] = 0
-    t=0
-    while count_infected(pop)>0:
-        t=t+1
-        inf = count_infected(pop)
-        for i in range(N):
-            if pop[i].is_susceptible():
-                contacts_num = 4
-                prob = 1 - (1-((p*inf)/(N-1)))**contacts_num        
-                if rand() < prob:
-                    pop[i].infect()
-                    t_firstinf[i] = t
-            if pop[i].is_infected():
-                if t_firstinf[i] == t-R-1:
-                    pop[i].recover()
-    return t
 
-
-def run_simulation_duration_random(p, R, N=200):
-    """
-    runs simulation of the stochastic SIR model
-    """
-    pop = [Agent() for i in range(N)]
-    pop[0].infect()
-    t_firstinf = np.zeros(N)
-    t_firstinf[0] = 0
-    t=0
-    fixed = np.random.randint(11, size=N)
-    while count_infected(pop)>0:
-        t = t + 1
-        var = np.random.randint(5, size=N)
-        contacts = fixed + var
-        inf = count_infected(pop)
-        for i in range(N):
-            if pop[i].is_susceptible():
-                contacts_num = contacts[i]
-                prob = 1 - (1-((p*inf)/(N-1)))**contacts_num        
-                if rand() < prob:
-                    pop[i].infect()
-                    t_firstinf[i] = t
-            if pop[i].is_infected():
-                if t_firstinf[i] == t-R-1:
-                    pop[i].recover()
-    return t
 

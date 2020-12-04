@@ -12,7 +12,7 @@ class TestDiscreteSpatialMethod(unittest.TestCase):
         """
         Tests the position is within the grid [0,1]x[0,1]
         """
-        agent = Agent()
+        agent = AgentSpatial()
         for i in range(100):
             agent.change_pos()
             self.assertTrue(0 <= agent.pos[0] <= 1)
@@ -22,14 +22,14 @@ class TestDiscreteSpatialMethod(unittest.TestCase):
         """
         Tests that Agent class returns 'S'
         """
-        agent = Agent()
+        agent = AgentSpatial()
         self.assertEqual(agent.state, 'S')
 
     def test_inf(self):
         """
         Tests that Agent class returns 'I'
         """
-        agent = Agent()
+        agent = AgentSpatial()
         agent.change_state()
         self.assertEqual(agent.state, 'I')
 
@@ -37,7 +37,7 @@ class TestDiscreteSpatialMethod(unittest.TestCase):
         """
         Tests that Agent class returns 'R'
         """
-        agent = Agent()
+        agent = AgentSpatial()
         agent.change_state()
         agent.change_state()
         self.assertEqual(agent.state, 'R')
