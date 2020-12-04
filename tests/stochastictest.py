@@ -2,6 +2,7 @@ import unittest
 import sys
 sys.path.append("../")
 from sir.discretemodel import *
+from sir.stochasticsir import *
 
 class TestDiscreteMethod(unittest.TestCase):
 
