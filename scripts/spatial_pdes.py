@@ -120,8 +120,8 @@ for i in range(m**2):
         
 for j in range(m**2):
     if I[j] == 1:
-        I[j] == .00001/totals #distrubiting same %of population infected across random grid points
-        S[j] == 1 - I[j]
+        I[j] = .00001/totals #distrubiting same %of population infected across random grid points
+        S[j] = 1 - I[j]
         
 SIR_init = np.append(np.append(S,I),R)
 
