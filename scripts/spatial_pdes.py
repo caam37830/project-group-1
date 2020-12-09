@@ -114,7 +114,7 @@ R = np.zeros((m**2,1))
 totals = 0
 for i in range(m**2):
     n = random.random()
-    if n <.25:
+    if n <.4: #40% chance
         I[i] = 1
         totals += 1
         
@@ -146,7 +146,7 @@ heatmap2d(final_R_random)
 plt.show()
 fig3.savefig("Final R Values, Starting Randomly, p = .5.png")
 
-##Spatial Script - Center
+##Spatial Script - Center, p = .75
 b = .15
 k = .10
 p = .75
@@ -187,7 +187,7 @@ heatmap2d(final_R_center)
 plt.show()
 fig4.savefig("Final R Values, Starting in Center, p = .75.png")
 
-##Spatial Script - Center
+##Spatial Script - Center, p = .25
 b = .15
 k = .10
 p = .25
