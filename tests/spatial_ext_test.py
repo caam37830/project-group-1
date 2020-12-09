@@ -54,7 +54,7 @@ class TestSpatialExtension(unittest.TestCase):
         # Test 2: Sum of ks = len(G)
         self.assertEqual(sum(ks), len(model.G))
 
-        # Test 3: No entries of M are greater than 1
-        for i in model.M:
-            for j in i:
-                self.assertTrue(j < 1)
+        # Test 3: Row sum of M are less than 1
+        sums = np.sum(model.M, axis=1)
+        for i in sums:
+            self.assertTrue(abs(1 - i) < 0.01)
