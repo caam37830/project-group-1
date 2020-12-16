@@ -1,0 +1,5 @@
+# packages required to run code
+numpy 
+matplotlib
+scipy
+sympy
