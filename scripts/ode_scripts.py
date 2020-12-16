@@ -1,3 +1,6 @@
+## This script contains code to implement/analyze the continous SIR ODE model
+
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
