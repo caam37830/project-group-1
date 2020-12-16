@@ -1,5 +1,5 @@
 """
-This document contains the code for the Discrete Spatial Model
+This document contains the code for the Discrete Spatial SIR Model
 """
 
 import sys
