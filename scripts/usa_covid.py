@@ -1,3 +1,5 @@
+#This script contains code to fit COVID-19 data in the USA to the continous ODE SIR model
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
